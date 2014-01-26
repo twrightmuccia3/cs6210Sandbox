@@ -37,6 +37,20 @@ int main(int argc, char **argv) {
 	 * YOUR CODE HERE...
 	 */
 	
+	fd = open(filename, O_RDWR);
+
+	while( sizeof(int) == read(fd, &key, sizeof(int)) ) {
+		if (key != srch_key)
+			lseek(fd, sizeof(int), SEEK_CUR);
+		else{
+			write(fd, &new_value, sizeof(int));
+			close(fd);
+			return EXIT_SUCCESS;
+		}
+	}
+
+	fprintf(stderr, "Key not found!");
+	return EXIT_FAILURE;
 	
 	
 }
